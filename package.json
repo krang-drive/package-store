@@ -1,0 +1,19 @@
+{
+  "name": "package-store",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krang-drive/package-store.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/krang-drive/package-store/issues"
+  },
+  "homepage": "https://github.com/krang-drive/package-store#readme"
+}
