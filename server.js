@@ -88,6 +88,25 @@ app.post('/packages', function(req, res){
   });
 
 });
+//----------------------------------------------------------------------------//
+app.post('/packageSet', function(req, res) {
+
+  var dataSet = req.body.data['packageData'];
+  console.log(dataSet);
+  for(var i = 0; i < dataSet.length; i++) {
+    packages.find({packageId: dataSet[i].packageId}, dataSet[i] , {upsert:true}, function(err, doc) {
+      if (!err) {
+        console.log('POST -> packageId: ' + dataSet[i].packageId + ', isDelivered: ' + dataSet[i].isDelivered);
+      }
+      else {
+        console.error("An Error has occured :(")
+        res.send(err);
+      }
+    });
+  }
+
+  res.send("sent")
+});
 
 //----------------------------------------------------------------------------//
 
@@ -122,7 +141,7 @@ app.get('/packages/package/:id', function(req, res){
 
   var id = req.params['id'];
 
-  packages.find({packageId = id}, function (err, doc){
+  packages.find({packageId: id}, function (err, doc){
 
       if(!err){
 
