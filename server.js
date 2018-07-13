@@ -96,7 +96,7 @@ app.post('/packageSet', function(req, res) {
   //for(var i = 0; i < dataSet.length; i++) {
     console.log(dataSet[1].packageId);
     dataSet.forEach(function(element) {
-      packages.find({},element,{upsert:true}, function(err, doc) {
+      packages.update({},element,{upsert:true}, function(err, doc) {
         if (!err) {
 
           console.log('POST -> packageId: ' + element.packageId + ', isDelivered: ' + element.isDelivered);
