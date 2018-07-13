@@ -70,7 +70,7 @@ app.get('/', function (req, res) {
 
 app.post('/packages', function(req, res){
 
-  packages.find({packageId: req.body.packageId}, req.body , {upsert:true}, function(err, doc) {
+  packages.findOneAndUpdate({packageId: req.body.packageId}, req.body , {upsert:true}, function(err, doc) {
 
     if (!err) {
 
