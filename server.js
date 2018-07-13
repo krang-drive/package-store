@@ -56,7 +56,7 @@ module.exports = packages;
 
 app.use(bodyParser.json());
 
-app.use(bodyParser.urlencoded({ extented: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //----------------------------------------------------------------------------//
 
@@ -95,7 +95,7 @@ app.get('/packages/facility/:id', function(req, res){
 
   var id = req.params['id'];
 
-  packages.find({facilityId = id}, function (err, doc){
+  packages.find({facilityId: id}, function (err, doc){
 
       if(!err){
 
