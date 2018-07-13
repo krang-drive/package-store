@@ -122,7 +122,7 @@ app.get('/packages/package/:id', function(req, res){
 
   var id = req.params['id'];
 
-  packages.find({packageId = id}, function (err, doc){
+  packages.find({packageId: id}, function (err, doc){
 
       if(!err){
 
