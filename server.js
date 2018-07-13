@@ -99,7 +99,7 @@ app.post('/packageSet', function(req, res) {
         console.log('POST -> packageId: ' + dataSet[i].packageId + ', isDelivered: ' + dataSet[i].isDelivered);
       }
       else {
-        console.error("An Error has occured :(")
+        console.error("An Error has occured :(", err)
         // res.send(err);
       }
     });
