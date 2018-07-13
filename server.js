@@ -93,10 +93,11 @@ app.post('/packageSet', function(req, res) {
   var dataSet = req.body.packageData;
   console.log("length", dataSet.length);
   //for(var i = 0; i < dataSet.length; i++) {
-    //console.log(dataSet[i]);
+    console.log(dataSet[1].packageId);
     dataSet.forEach(function(element) {
       packages.find({},dataSet[element],{upsert:true}, function(err, doc) {
         if (!err) {
+          console.log(JSON.stringify(dataSet[element]));
           console.log('POST -> packageId: ' + dataSet[element].packageId + ', isDelivered: ' + dataSet[element].isDelivered);
         }
         else {
