@@ -92,19 +92,23 @@ app.post('/packages', function(req, res){
 app.post('/packageSet', function(req, res) {
   var dataSet = req.body.packageData;
   console.log("length", dataSet.length);
-  for(var i = 0; i < dataSet.length; i++) {
-    console.log(dataSet[i]);
-    packages.findOneAndUpdate({packageId: dataSet[i].packageId}, dataSet[i] , {upsert:true}, function(err, doc) {
-      console.log(i, dataSet[i]);
-      if (!err) {
-        console.log('POST -> packageId: ' + dataSet[i].packageId + ', isDelivered: ' + dataSet[i].isDelivered);
-      }
-      else {
-        console.error("An Error has occured :(", err)
-        // res.send(err);
-      }
-    });
-  }
+  //for(var i = 0; i < dataSet.length; i++) {
+    //console.log(dataSet[i]);
+    dataSet.forEach(function(element) {
+      packages.find({},dataSet[element],{upsert:true}, function(err, doc) {
+        if (!err) {
+          console.log('POST -> packageId: ' + dataSet[element].packageId + ', isDelivered: ' + dataSet[element].isDelivered);
+        }
+        else {
+          console.error("An Error has occured :(", err)
+          // res.send(err);
+        }
+      })
+    })
+
+
+  //}
+
 
   res.send("sent")
 });
