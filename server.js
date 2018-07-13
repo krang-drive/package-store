@@ -45,10 +45,10 @@ var packageSchema = new Schema({
 })
 
 //Create a model that uses the schema.
-var package = mongoose.model('driver', driverSchema);
+var packages = mongoose.model('packages', packageSchema);
 
 //Make this available to Node app users.
-module.exports = package;
+module.exports = packages;
 
 //----------------------------------------------------------------------------//
 //                               Function Calls                               //
@@ -68,40 +68,81 @@ app.get('/', function (req, res) {
 
 //----------------------------------------------------------------------------//
 
-app.get('/packages', function (req, res) {
+app.post('/packages', function(req, res){
 
-    package.find({online: req.body.TODOTODOTODO}, function (err, docs) {
+  packages.find({packageId: req.body.packageId}, req.body , {upsert:true}, function(err, doc) {
+
+    if (!err) {
+
+      console.log('POST -> packageId: ' + req.body.packageId + ', isDelivered: ' + req.body.isDelivered);
+      res.send(doc);
+
+    }
+    else {
+
+      console.error("An Error has occured :(")
+      res.send(err);
+
+    }
+
+  });
+
+});
+
+//----------------------------------------------------------------------------//
+
+app.get('/packages/facility/:id', function(req, res){
+
+  var id = req.params['id'];
+
+  packages.find({facilityId = id}, function (err, doc){
 
       if(!err){
 
-          res.send(docs);
+          res.send(doc);
 
-          console.log("Package found.");
-
-      }
-      else {
-
-          console.log("Error, no packages found!");
+          console.log('Success! Package(s) found!');
 
       }
+      else{
 
-    });
+          res.send(err);
+
+          console.error("Error, no packages found!")
+
+      }
+
+  });
 
 });
 
 //----------------------------------------------------------------------------//
 
-app.post('/packages', function(req, res){
+app.get('/packages/package/:id', function(req, res){
 
+  var id = req.params['id'];
+
+  packages.find({packageId = id}, function (err, doc){
+
+      if(!err){
+
+          res.send(doc);
+
+          console.log('Success! Package found!');
+
+      }
+      else{
+
+          res.send(err);
+
+          console.error("Error, no packages found!")
+
+      }
+
+  });
 
 });
 
-//----------------------------------------------------------------------------//
-
-app.get('/packages/:packageId', function(req, res){
-
-
-});
 
 //----------------------------------------------------------------------------//
 
