@@ -91,22 +91,18 @@ app.post('/packages', function(req, res){
 //----------------------------------------------------------------------------//
 app.post('/packageSet', function(req, res) {
   var dataSet = req.body.packageData;
-  console.log(dataSet);
-  console.log("length", dataSet.length);
-  //for(var i = 0; i < dataSet.length; i++) {
-    console.log(dataSet[1].packageId);
-    dataSet.forEach(function(element) {
-      packages.update({},element,{upsert:true}, function(err, doc) {
-        if (!err) {
+  dataSet.forEach(function(element) {
+    packages.update({},element,{upsert:true}, function(err, doc) {
+      if (!err) {
 
-          console.log('POST -> packageId: ' + element.packageId + ', isDelivered: ' + element.isDelivered);
-        }
-        else {
-          console.error("An Error has occured :(", err)
-          // res.send(err);
-        }
-      })
+        console.log('POST -> packageId: ' + element.packageId + ', isDelivered: ' + element.isDelivered);
+      }
+      else {
+        console.error("An Error has occured :(", err)
+        // res.send(err);
+      }
     })
+  })
 
 
   //}
