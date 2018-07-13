@@ -91,7 +91,7 @@ app.post('/packages', function(req, res){
 //----------------------------------------------------------------------------//
 app.post('/packageSet', function(req, res) {
   console.log(req.body);
-  var dataSet = req.body.data.packageData;
+  var dataSet = req.body.packageData;
   console.log(dataSet);
   for(var i = 0; i < dataSet.length; i++) {
     packages.find({packageId: dataSet[i].packageId}, dataSet[i] , {upsert:true}, function(err, doc) {
