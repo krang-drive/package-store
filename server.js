@@ -90,7 +90,7 @@ app.post('/packages', function(req, res){
 });
 //----------------------------------------------------------------------------//
 app.post('/packageSet', function(req, res) {
-
+  console.log(req.body);
   var dataSet = req.body.data['packageData'];
   console.log(dataSet);
   for(var i = 0; i < dataSet.length; i++) {
