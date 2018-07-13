@@ -100,7 +100,7 @@ app.post('/packageSet', function(req, res) {
       }
       else {
         console.error("An Error has occured :(")
-        res.send(err);
+        // res.send(err);
       }
     });
   }
