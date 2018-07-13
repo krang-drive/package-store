@@ -94,7 +94,7 @@ app.post('/packageSet', function(req, res) {
   var dataSet = req.body.packageData;
   console.log(dataSet);
   for(var i = 0; i < dataSet.length; i++) {
-    packages.find({packageId: dataSet[i].packageId}, dataSet[i] , {upsert:true}, function(err, doc) {
+    packages.findOneAndUpdate({packageId: dataSet[i].packageId}, dataSet[i] , {upsert:true}, function(err, doc) {
       if (!err) {
         console.log('POST -> packageId: ' + dataSet[i].packageId + ', isDelivered: ' + dataSet[i].isDelivered);
       }
